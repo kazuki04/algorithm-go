@@ -26,6 +26,13 @@ func (l *LinkedList) append(data int) {
 	last_node.next_node = new_node
 }
 
+func (l *LinkedList) insert(data int) {
+	new_node := &Node{data: data, next_node: nil}
+	// To Do : Why infinite loop occurs when the below two code are switched.
+	new_node.next_node = l.head
+	l.head = new_node
+}
+
 func (l *LinkedList) print() {
 	if l.head == nil {
 		return
@@ -42,5 +49,6 @@ func main() {
 	l.append(1)
 	l.append(2)
 	l.append(3)
+	l.insert(9)
 	l.print()
 }
