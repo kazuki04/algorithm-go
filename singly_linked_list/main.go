@@ -26,8 +26,21 @@ func (l *LinkedList) append(data int) {
 	last_node.next_node = new_node
 }
 
+func (l *LinkedList) print() {
+	if l.head == nil {
+		return
+	}
+	current_node := l.head
+	for current_node != nil {
+		fmt.Println(current_node.data)
+		current_node = current_node.next_node
+	}
+}
+
 func main() {
 	l := LinkedList{}
 	l.append(1)
-	fmt.Println(l.head.data)
+	l.append(2)
+	l.append(3)
+	l.print()
 }
