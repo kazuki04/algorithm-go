@@ -52,7 +52,7 @@ func (l *LinkedList) remove(data int) {
 		return
 	}
 
-	previous_node := &Node{}
+	var previous_node *Node = nil
 	for current_node != nil && current_node.data != data {
 		// To Do : why the node isn't removed when the below two codes are switched.
 		previous_node = current_node
