@@ -66,12 +66,28 @@ func (l *LinkedList) remove(data int) {
 	current_node = nil
 }
 
+func (l *LinkedList) reverse_iterative() {
+	current_node := l.head
+	var previous_node *Node = nil
+	for current_node != nil {
+		next_node := current_node.next_node
+		current_node.next_node = previous_node
+		previous_node = current_node
+		// To Do : Why print only l.head element if the below code instead of current_node = next_node
+		// current_node = current_node.next_node
+		current_node = next_node
+	}
+	l.head = previous_node
+}
+
 func main() {
 	l := LinkedList{}
 	l.append(1)
 	l.append(2)
 	l.append(3)
-	l.insert(9)
-	l.remove(9)
+	l.append(4)
+	l.print()
+	fmt.Println("#########")
+	l.reverse_iterative()
 	l.print()
 }
