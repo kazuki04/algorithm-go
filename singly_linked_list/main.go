@@ -44,11 +44,34 @@ func (l *LinkedList) print() {
 	}
 }
 
+func (l *LinkedList) remove(data int) {
+	current_node := l.head
+	if current_node != nil && current_node.data == data {
+		l.head = current_node.next_node
+		current_node = nil
+		return
+	}
+
+	previous_node := &Node{}
+	for current_node != nil && current_node.data != data {
+		// To Do : why the node isn't removed when the below two codes are switched.
+		previous_node = current_node
+		current_node = current_node.next_node
+	}
+
+	if current_node == nil {
+		return
+	}
+	previous_node.next_node = current_node.next_node
+	current_node = nil
+}
+
 func main() {
 	l := LinkedList{}
 	l.append(1)
 	l.append(2)
 	l.append(3)
 	l.insert(9)
+	l.remove(9)
 	l.print()
 }
