@@ -84,13 +84,26 @@ func (d *DoublyLinkedList) remove(data int) {
 	}
 }
 
+func (d *DoublyLinkedList) reverse_iterative() {
+	var previous_node *Node = nil
+	current_node := d.head
+
+	for current_node != nil {
+		previous_node = current_node.previous_node
+		current_node.previous_node = current_node.next_node
+		current_node.next_node = previous_node
+		current_node = current_node.previous_node
+	}
+	d.head = previous_node.previous_node
+}
+
 func main() {
-	d := &DoublyLinkedList{nil}
+	d := &DoublyLinkedList{}
+	d.insert(0)
 	d.append(1)
 	d.append(2)
-	d.insert(0)
 	d.print()
-	d.remove(2)
 	fmt.Println("##########")
+	d.reverse_iterative()
 	d.print()
 }
