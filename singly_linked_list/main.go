@@ -80,6 +80,22 @@ func (l *LinkedList) reverse_iterative() {
 	l.head = previous_node
 }
 
+func (l *LinkedList) reverse_recursive() {
+	var _reverse_recursive func(*Node, *Node) *Node
+	_reverse_recursive = func(current_node *Node, previous_node *Node) *Node {
+		if current_node == nil {
+			return previous_node
+		}
+
+		next_node := current_node.next_node
+		current_node.next_node = previous_node
+		previous_node = current_node
+		current_node = next_node
+		return _reverse_recursive(current_node, previous_node)
+	}
+	l.head = _reverse_recursive(l.head, nil)
+}
+
 func (l *LinkedList) reverse_even() {
 	var _reverse_even func(*Node, *Node) *Node
 	_reverse_even = func(head *Node, previous_node *Node) *Node {
@@ -113,12 +129,8 @@ func main() {
 	l.append(1)
 	l.append(3)
 	l.append(5)
-	l.append(2)
-	l.append(4)
-	l.append(6)
-	l.append(1)
 	l.print()
 	fmt.Println("#########")
-	l.reverse_even()
+	l.reverse_recursive()
 	l.print()
 }
