@@ -46,10 +46,51 @@ func (d *DoublyLinkedList) print() {
 	}
 }
 
+func (d *DoublyLinkedList) remove(data int) {
+	current_node := d.head
+	if current_node != nil && current_node.data == data {
+		if current_node.next_node == nil {
+			current_node = nil
+			return
+		} else {
+			next_node := current_node.next_node
+			d.head = next_node
+			next_node.previous_node = nil
+			current_node = nil
+			return
+		}
+	}
+
+	for current_node != nil && current_node.data != data {
+		current_node = current_node.next_node
+	}
+
+	if current_node == nil {
+		return
+	}
+
+	if current_node.next_node == nil {
+		previous_node := current_node.previous_node
+		previous_node.next_node = nil
+		current_node = nil
+		return
+	} else {
+		previous_node := current_node.previous_node
+		next_node := current_node.next_node
+		previous_node.next_node = next_node
+		next_node.previous_node = previous_node
+		current_node = nil
+		return
+	}
+}
+
 func main() {
 	d := &DoublyLinkedList{nil}
 	d.append(1)
 	d.append(2)
 	d.insert(0)
+	d.print()
+	d.remove(2)
+	fmt.Println("##########")
 	d.print()
 }
