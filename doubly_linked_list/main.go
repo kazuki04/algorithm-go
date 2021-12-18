@@ -26,10 +26,17 @@ func (d *DoublyLinkedList) append(data int) {
 	new_node.previous_node = current_node
 }
 
+func (d *DoublyLinkedList) print() {
+	current_node := d.head
+	for current_node != nil {
+		fmt.Println(current_node.data)
+		current_node = current_node.next_node
+	}
+}
+
 func main() {
 	d := &DoublyLinkedList{nil}
 	d.append(1)
 	d.append(2)
-	fmt.Println(d.head.data)
-	fmt.Println(d.head.next_node.data)
+	d.print()
 }
