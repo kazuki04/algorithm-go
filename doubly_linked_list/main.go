@@ -97,6 +97,24 @@ func (d *DoublyLinkedList) reverse_iterative() {
 	d.head = previous_node.previous_node
 }
 
+func (d *DoublyLinkedList) reverse_recursive() {
+	var _reverse_recursive func(current_node *Node) *Node
+	_reverse_recursive = func(current_node *Node) *Node {
+		if current_node == nil {
+			return nil
+		}
+		previous_node := current_node.previous_node
+		current_node.previous_node = current_node.next_node
+		current_node.next_node = previous_node
+
+		if current_node.previous_node == nil {
+			return current_node
+		}
+		return _reverse_recursive(current_node.previous_node)
+	}
+	d.head = _reverse_recursive(d.head)
+}
+
 func main() {
 	d := &DoublyLinkedList{}
 	d.insert(0)
@@ -104,6 +122,6 @@ func main() {
 	d.append(2)
 	d.print()
 	fmt.Println("##########")
-	d.reverse_iterative()
+	d.reverse_recursive()
 	d.print()
 }
