@@ -115,13 +115,34 @@ func (d *DoublyLinkedList) reverse_recursive() {
 	d.head = _reverse_recursive(d.head)
 }
 
+// sort only data
+func (d *DoublyLinkedList) sort() {
+	if d.head == nil {
+		return
+	}
+
+	current_node := d.head
+	for current_node.next_node != nil {
+		next_node := current_node.next_node
+		for next_node != nil {
+			if current_node.data > next_node.data {
+				current_node.data, next_node.data = next_node.data, current_node.data
+			}
+			next_node = next_node.next_node
+		}
+
+		current_node = current_node.next_node
+	}
+}
+
 func main() {
 	d := &DoublyLinkedList{}
-	d.insert(0)
 	d.append(1)
+	d.append(8)
+	d.append(0)
 	d.append(2)
 	d.print()
 	fmt.Println("##########")
-	d.reverse_recursive()
+	d.sort()
 	d.print()
 }
