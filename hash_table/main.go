@@ -14,8 +14,7 @@ type HashTable struct {
 }
 
 func newHashTable(size int64) *HashTable {
-	h := &HashTable{size: size, table: make([][]map[interface{}]interface{}, size)}
-	return h
+	return &HashTable{size: size, table: make([][]map[interface{}]interface{}, size)}
 }
 
 // To Do: Consider the type of key. string or interface{}
@@ -40,6 +39,9 @@ func (h *HashTable) add(key string, value interface{}) {
 }
 
 func main() {
-	h := newHashTable(10)
-	fmt.Println(h)
+	// hashメソッドの返り値がすべて7になってしまう
+
+	// h := Human{Name: "Bob", Age: 20}
+	// s := "My name is Kazuki"
+
 }
